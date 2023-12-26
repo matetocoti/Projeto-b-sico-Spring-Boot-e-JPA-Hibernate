@@ -11,14 +11,17 @@ package com.matheusport.project01.resources;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-
-
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.matheusport.project01.entities.User;
 import com.matheusport.project01.services.UserService;
 
+import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +60,25 @@ public class UserResource {
 		userService.deleteById(id);
 		return ResponseEntity.noContent().build();
 	}
+	
+	
+	//INSERT
+	@PostMapping(value = "/{addressId}")
+	public ResponseEntity<User> insert(@RequestBody User user ,@PathVariable Long addressId){
+		user = userService.insert(user ,addressId);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(user.getId()).toUri();
+		return ResponseEntity.created(uri).body(user);
+	}
+
+	
+	
+	//UPDATE
+	@PutMapping(value = "/{id}")
+	public ResponseEntity<User> update(@RequestBody User user ,@PathVariable Long id){
+		user = userService.update(user, id);
+		return ResponseEntity.ok().body(user);
+	} 
+	
 	
 	
 	

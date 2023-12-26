@@ -7,7 +7,9 @@ package com.matheusport.project01.config;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import com.matheusport.project01.entities.Address;
 import com.matheusport.project01.entities.User;
+import com.matheusport.project01.repositories.AddressRepository;
 import com.matheusport.project01.repositories.UserRepository;
 
 
@@ -31,7 +33,8 @@ public class TestConfig implements CommandLineRunner {
 	@Autowired
 	private UserRepository userRepository;
 	
-	
+	@Autowired
+	private AddressRepository addressRepository; 
 	//--(END)--//
 	
 	
@@ -45,8 +48,16 @@ public class TestConfig implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		
 		
-		User user01 = new User(null ,"Matheus");
-		User user02 = new User(null ,"Pedro");
+		
+		Address address01 = new Address(null ,"AA", "BR", "2222222");
+		
+		
+		addressRepository.save(address01);
+		
+		
+		
+		User user01 = new User(null ,"Matheus" ,address01);
+		User user02 = new User(null ,"Pedri" ,address01);
 		
 		
 		

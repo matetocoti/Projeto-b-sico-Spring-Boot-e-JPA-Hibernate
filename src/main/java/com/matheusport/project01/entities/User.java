@@ -5,11 +5,21 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+
+import jakarta.persistence.ManyToOne;
+
+
 import jakarta.persistence.Table;
 import java.io.Serializable;
+
 import java.time.LocalDate;
+
 import java.util.Objects;
+
+
+
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 //--(END)--//
 
 @Entity
@@ -18,6 +28,7 @@ public class User implements Serializable{
 
 	
 	private static final long serialVersionUID = 1L;
+	
 	
 	
 	//--(ATTRIBUTES)--//
@@ -35,9 +46,9 @@ public class User implements Serializable{
 	
 	
 	//--(ASSOCIATION)--//
-	
-
-	
+	@JsonIgnore
+	@ManyToOne
+	private Address address;
 	//--(END)--//	
 		
 	
@@ -49,11 +60,12 @@ public class User implements Serializable{
 	}
 
 	
-	public User(Long id, String name) {
+	public User(Long id, String name ,Address address) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.added = LocalDate.now();
+		this.address = address;
+		this.added = LocalDate.now(); 
 	}
 	//--(END)--//	
 
@@ -76,6 +88,18 @@ public class User implements Serializable{
 	
 	
 
+	
+	public Address getAddress() {
+		return address;
+	}
+
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -84,7 +108,9 @@ public class User implements Serializable{
 		return added;
 	}
 
-	
+	public void setAdded(LocalDate added) {
+		this.added = added;
+	}
 
 	
 	//--(END)--//
@@ -108,6 +134,11 @@ public class User implements Serializable{
 		User other = (User) obj;
 		return Objects.equals(id, other.id);
 	}
+
+
+
+
+
 
 	
 	//--(END)--//
