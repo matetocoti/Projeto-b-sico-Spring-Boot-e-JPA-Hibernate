@@ -79,6 +79,13 @@ public class UserResource {
 		return ResponseEntity.ok().body(user);
 	} 
 	
+	//UPDATE-ADDRESS
+	@PutMapping(value = "/{userId}/{addressId}")
+	public ResponseEntity<User> updateAddress(@PathVariable Long userId ,@PathVariable Long addressId){
+		User user = userService.updateAddress(userId, addressId);
+		return ResponseEntity.ok().body(user);
+	}
+	
 	
 	
 	

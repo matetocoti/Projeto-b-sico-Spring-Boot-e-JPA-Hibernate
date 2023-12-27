@@ -74,6 +74,12 @@ public class UserService {
 	}
 	
 	//LINK-ADDRESS
+	public User updateAddress(Long userId ,Long addressId){
+		// Reference --> User to set
+		User user = userRepository.getReferenceById(userId);
+		user.setAddress(addressService.findById(addressId));
+		return userRepository.save(user);
+	}
 	
 	
 	
