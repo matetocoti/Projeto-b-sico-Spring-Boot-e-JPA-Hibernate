@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.matheusport.project01.entities.User;
+import com.matheusport.project01.repositories.AddressRepository;
 import com.matheusport.project01.repositories.UserRepository;
 
 import java.time.LocalDate;
@@ -28,7 +29,7 @@ public class UserService {
 	private UserRepository userRepository; 
 	
 	@Autowired
-	private AddressService addressService;
+	private AddressRepository addressRepository;
 	
 	
 	//FIND-BY-ID
@@ -53,7 +54,7 @@ public class UserService {
 	
 	//INSERT
 	public User insert(User user ,Long addressId){
-		user.setAddress(addressService.findById(addressId));
+		user.setAddress(addressRepository.getReferenceById(addressId));
 		user.setAdded(LocalDate.now());
 		return userRepository.save(user);
 	}
@@ -77,7 +78,7 @@ public class UserService {
 	public User updateAddress(Long userId ,Long addressId){
 		// Reference --> User to set
 		User user = userRepository.getReferenceById(userId);
-		user.setAddress(addressService.findById(addressId));
+		user.setAddress(addressRepository.getReferenceById(addressId));
 		return userRepository.save(user);
 	}
 	
