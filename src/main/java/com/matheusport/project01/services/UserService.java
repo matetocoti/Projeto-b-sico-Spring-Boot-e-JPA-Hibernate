@@ -11,9 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 
+
 import com.matheusport.project01.entities.User;
 import com.matheusport.project01.repositories.AddressRepository;
 import com.matheusport.project01.repositories.UserRepository;
+
+import com.matheusport.project01.services.exceptions.ResourceNotFoundException;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -35,7 +38,7 @@ public class UserService {
 	//FIND-BY-ID
 	public User findById(Long id) {
 		Optional<User> optionalUser = userRepository.findById(id);
-		return optionalUser.get();
+		return optionalUser.orElseThrow( () -> new ResourceNotFoundException(id));
 	}
 	
 	
