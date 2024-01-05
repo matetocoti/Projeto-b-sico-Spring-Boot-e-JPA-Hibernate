@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -80,8 +82,8 @@ public class UserResource {
 	} 
 	
 	//UPDATE-ADDRESS
-	@PutMapping(value = "/{userId}/{addressId}")
-	public ResponseEntity<User> updateAddress(@PathVariable Long userId ,@PathVariable Long addressId){
+	@RequestMapping(value = "/updateAddress" ,method = RequestMethod.PUT) // Same as|== @PutMapping(value = "/updateAddress")
+	public ResponseEntity<User> updateAddress(@RequestParam(value = "userId", defaultValue = "") Long userId ,@RequestParam(value = "addressId" ,defaultValue = "") Long addressId){
 		User user = userService.updateAddress(userId, addressId);
 		return ResponseEntity.ok().body(user);
 	}
