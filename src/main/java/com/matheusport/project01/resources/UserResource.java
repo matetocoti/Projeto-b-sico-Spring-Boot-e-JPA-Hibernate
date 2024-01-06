@@ -56,6 +56,29 @@ public class UserResource {
 		return ResponseEntity.ok().body(userList);
 	}
 	
+	
+	
+	
+	//FIND-BY-NAME----Version1
+	@RequestMapping(value = "/findByName" ,method = RequestMethod.GET)
+	public ResponseEntity<List<User>> findByName(@RequestParam(value = "name" ,defaultValue = "") String name){
+		List<User> userList = userService.findByName(name);
+		return ResponseEntity.ok().body(userList);
+	}
+	
+	
+	
+	//FIND-BY-NAME----Version02
+	@RequestMapping(value = "/findByUserName" ,method = RequestMethod.GET)
+	public ResponseEntity<List<User>> findByUserName(@RequestParam(value = "name" ,defaultValue = "") String name){
+		List<User> userList = userService.findByUseName(name);
+		return ResponseEntity.ok().body(userList);
+	}
+	
+	
+	
+	
+	
 	//DELETE
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> deleteById(@PathVariable Long id){

@@ -48,6 +48,23 @@ public class UserService {
 	}
 	
 	
+	
+	
+	
+	//FIND-BY-NAME---VERSION 01
+	public List<User> findByName(String name) {
+		return userRepository.findByName(name);
+	}
+	
+	//FIND-BY-USER-NAME--VERSION 02
+	public List<User> findByUseName(String name) {
+		return userRepository.findByUserName(name);
+	}
+	
+	
+	
+	
+	
 	//DELETE
 	public void deleteById(Long id) {
 		userRepository.deleteById(id);
