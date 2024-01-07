@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.matheusport.project01.entities.Address;
 import com.matheusport.project01.repositories.AddressRepository;
+
 import java.util.List;
 import java.util.Optional;
 //--(END)--//
@@ -20,27 +21,27 @@ public class AddressService {
 
 	@Autowired
 	private AddressRepository addressRepository;
-	
-	
-	
+		
 	//FIND-BY-ID
 	public Address findById(Long id) {
 		Optional<Address> optionalAddress = addressRepository.findById(id);
 		return optionalAddress.get();
 	}
 	
-	
 	//FIND-ALL
 	public List<Address> findAll(){
 		return addressRepository.findAll();
 	}
 	
+	//FIND-BY-CEP
+	public List<Address> findByCep(String cep){
+		return addressRepository.findByCep(cep);
+	}
 	
 	//INSERT
 	public Address insert(Address address) {
 		return addressRepository.save(address);
 	}
-	
 	
 	//UPDATE
 	public Address update(Address addressNewSetting ,Long id) {
@@ -54,9 +55,4 @@ public class AddressService {
 		address.setCoutry(addressNewSetting.getCoutry());
 		address.setCep(addressNewSetting.getCep());
 	}
-	
-	
-	
-	
-	
 }
